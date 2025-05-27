@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compartilhando GIFs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .gif-container {
+            margin-top: 20px;
+        }
+        .gif-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .gif-card:hover {
+            transform: scale(1.05);
+        }
+        .gif-image {
+            width: 100%;
+            height: auto;
+        }
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Pesquise e Compartilhe GIFs!</h1>
+        <form method="POST" class="text-center mt-4">
+            <div class="input-group mb-3">
+                <input type="text" name="search_term" class="form-control" placeholder="Digite um termo..." required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <div class="row gif-container">
+            {% for gif in gifs %}
+                <div class="col-md-4 mb-4">
+                    <div class="gif-card">
+                        <img src="{{ gif.images.fixed_height.url }}" alt="GIF" class="gif-image">
+                        <div class="card-body text-center">
+                            <a href="https://wa.me/?text={{ gif.url }}" class="btn btn-whatsapp" target="_blank">Enviar pelo WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
